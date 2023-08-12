@@ -7,8 +7,8 @@ btn.addEventListener("click", (e)=>{
     const password=document.getElementById('password').value;
 
     const obj={
-        UserName:userName,
-        Email:email,
+        userName:userName,
+        email:email,
         password:password
     }
 
@@ -16,6 +16,16 @@ btn.addEventListener("click", (e)=>{
     .then((response)=>{
         console.log(response);
     }).catch((err)=>{
-        console.log(err);
+        console.log(err.response.data);
+        error(err.response.data);
     })
 })
+
+//showing the error
+function error(errData){
+    let ul=document.createElement('ul');
+    ul.textContent=errData.error;
+    ul.style.color='red';
+    const container=document.getElementById('emailContainer');
+    container.appendChild(ul);
+}
