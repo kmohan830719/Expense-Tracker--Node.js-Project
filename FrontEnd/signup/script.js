@@ -17,15 +17,21 @@ btn.addEventListener("click", (e)=>{
         console.log(response);
     }).catch((err)=>{
         console.log(err.response.data);
-        error(err.response.data);
+        displayError(err.response.data.error);
     })
 })
 
 //showing the error
-function error(errData){
-    let ul=document.createElement('ul');
-    ul.textContent=errData.error;
-    ul.style.color='red';
-    const container=document.getElementById('emailContainer');
-    container.appendChild(ul);
+function displayError(errorMessage){
+    const container = document.getElementById('errorContainer');
+            
+    // Clear previous error messages
+    while (container.firstChild) {
+        container.removeChild(container.firstChild);
+    }
+
+    const errorDiv = document.createElement('div');
+    errorDiv.textContent = errorMessage;
+    errorDiv.style.color = 'red';
+    container.appendChild(errorDiv);
 }
